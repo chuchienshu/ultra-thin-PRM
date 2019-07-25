@@ -19,10 +19,10 @@ python main.py
 ## Sample result
 
 <figure class="half">
-    <img src="img/prm_2.png", title="ground truth">
+    <img src="img/prm_2.png", title="">
 </figure>
 <figure class="half">
-    <img src="img/prm_3.png", title="learning rate">
+    <img src="img/prm_3.png", title="">
 </figure>
 
 
