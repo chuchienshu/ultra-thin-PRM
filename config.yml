@@ -1,0 +1,59 @@
+dataset: 
+  # _name: pascal_voc_classification
+  split: trainval
+  data_dir: ./datasets/VOCdevkit
+  year: 2012
+
+train_transform:
+  # _name: image_transform
+  augmentation:
+    horizontal_flip: 0.5
+  image_size: [448, 448]
+  mean: [0.485, 0.456, 0.406]
+  std: [0.229, 0.224, 0.225]
+
+test_transform:
+  # _name: image_transform
+  image_size: [448, 448]
+  mean: [0.485, 0.456, 0.406]
+  std: [0.229, 0.224, 0.225]
+
+data_loaders:
+  # _name: fetch_data
+  batch_size: 16
+  num_workers: 4
+  train_augmentation:
+    horizontal_flip: 0.5
+  train_splits:
+    - trainval
+
+model:
+  # _name: peak_response_mapping
+  # backbone:
+  #   _name: fc_resnet50
+  win_size: 3
+  sub_pixel_locating_factor: 8
+  enable_peak_stimulation: true
+
+optimizer:
+  # _name: sgd_optimizer
+  lr: 0.01
+  momentum: 0.9
+  weight_decay: 1.0e-4
+
+finetune:
+  # _name: finetune
+  base_lr: 0.01
+  groups:
+    'features': 0.01
+
+meters:
+  loss:
+    _name: loss_meter
+
+max_epoch: 20
+
+device: cuda
+log: ./
+
+snapshot: ./snapshots
